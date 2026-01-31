@@ -26,4 +26,5 @@ TBA
 TBA
 
 # Input \ Output
-TBA
+- INPUT [`variableName`] AS [`datatype`]
+- OUTPUT [`variableName`]

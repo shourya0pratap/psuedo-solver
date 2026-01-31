@@ -35,35 +35,56 @@ def setVariable(instruction):
     val = getValue(instruction[3])
     variables[var] = val
 
-def add(instruction):
+def addInstruct(instruction):
     val = getValue(instruction[1])
     var = instruction[3]
     # add val TO var
     variables[var] += val
     
-def sub(instruction):
+def subInstruct(instruction):
     val = getValue(instruction[1])
     var = instruction[3]
     # subtract val FROM var
     variables[var] -= val
     
-def mul(instruction):
+def mulInstruct(instruction):
     val = getValue(instruction[1])
     var = instruction[3]
     # multiply var WITH val
     variables[var] *= val
     
-def div(instruction):
+def divInstruct(instruction):
     val = getValue(instruction[1])
     var = instruction[3]
     # divide var BY val
     variables[var] /= val
 
-def exp(instruction):
+def expInstruct(instruction):
     val = getValue(instruction[1])
     var = instruction[3]
     # raise var TO val
     variables[var] **= val
+
+def inputInstruct(instruction:list[str]):
+    var = instruction[1]
+    dataType = instruction[3]
+    val = input(f"Enter value for {var}: ")
+    match dataType:
+        case "INT":
+            val = int(val) 
+        case "FLOAT":
+            val = float(val)
+        case "BOOL":
+            val = bool(val)
+    variables[var] = val
+
+def outputInstruct(instruction:list[str]):
+    out = "".join(instruction[1:])
+    if out.startswith('"'):
+        out = out.strip('"')
+    elif out in variables:
+        out = variables[out]
+    print(out)
 
 def main(st:str):
     instructions =  st.split("\n")  
@@ -75,15 +96,18 @@ def main(st:str):
             case "SET":
                 setVariable(instructStr)
             case "ADD":
-                add(instructStr)
+                addInstruct(instructStr)
             case "SUB":
-                sub(instructStr)
+                subInstruct(instructStr)
             case "MUL":
-                mul(instructStr)
+                mulInstruct(instructStr)
             case "DIV":
-                div(instructStr)
+                divInstruct(instructStr)
             case "EXP":
-                exp(instructStr)
-        print(instruction, variables)  
-st = "LET INT x BE 5\nLET FLOAT y BE 10\nSET x TO y"
+                expInstruct(instructStr)
+            case "INPUT":
+                inputInstruct(instructStr)
+            case "OUTPUT":
+                outputInstruct(instructStr)
+st = "INPUT x as STR\nOUTPUT x"
 main(st)
