@@ -1,5 +1,10 @@
 # Instructions for Psuedo Code
 
+# Start \ Stop
+
+- START
+- STOP
+
 # Assignment Operations
 
 - LET [`dataType`] [`variableName`] BE [`val`]
@@ -10,21 +15,37 @@
 - ADD [`val\var`] TO [`target`]
 - SUB [`val\var`] FROM [`target`]
 - MUL [`target`] WITH [`val\var`]
+- REM [`target`] BY [`val\var`]
 - DIV [`target`] BY [`val\var`]
-- EXP [`target`] TO [`y`]
+- EXP [`target`] TO [`val\var`]
 
 # Relational
-TBA
 
-# Comparative
-TBA
+- [`arg1`] LT [`arg2`]
+- [`arg1`] GT [`arg2`]
+- [`arg1`] LE [`arg2`]
+- [`arg1`] GE [`arg2`]
+- [`arg1`] EQ [`arg2`]
+- [`arg1`] NE [`arg2`]
+
+# Logical
+
+- AND
+- OR
+- NOT
 
 # Conditional
-TBA
+
+- IF ... THEN
+- ELSE
+- ELIF
+- ENDIF
 
 # Iterative
+
 TBA
 
 # Input \ Output
+
 - INPUT [`variableName`] AS [`datatype`]
 - OUTPUT [`variableName`]

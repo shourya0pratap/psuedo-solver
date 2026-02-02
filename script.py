@@ -18,14 +18,15 @@ def getValue(token:str):
 def createVariable(instruction):
     type = instruction[1]
     var = instruction[2]
-    val = instruction[4]
+    val = " ".join(instruction[4:])
     match(type):
         case "INT":
             val = int(val)
         case "FLOAT":
             val = float(val)
         case "STR":
-            val = str(val)
+            val = val.strip('"')
+            pass
         case "BOOL":
             val = bool(val)
     variables[var] = val
@@ -48,20 +49,26 @@ def subInstruct(instruction):
     variables[var] -= val
     
 def mulInstruct(instruction):
-    val = getValue(instruction[1])
-    var = instruction[3]
+    val = getValue(instruction[3])
+    var = instruction[1]
     # multiply var WITH val
     variables[var] *= val
-    
+
+def remInstruct(instruction):
+    val = getValue(instruction[3])
+    var = instruction[1]
+    # modulus var BY val
+    variables[var] %= val
+
 def divInstruct(instruction):
-    val = getValue(instruction[1])
-    var = instruction[3]
+    val = getValue(instruction[3])
+    var = instruction[1]
     # divide var BY val
     variables[var] /= val
 
 def expInstruct(instruction):
-    val = getValue(instruction[1])
-    var = instruction[3]
+    val = getValue(instruction[3])
+    var = instruction[1]
     # raise var TO val
     variables[var] **= val
 
@@ -79,17 +86,41 @@ def inputInstruct(instruction:list[str]):
     variables[var] = val
 
 def outputInstruct(instruction:list[str]):
-    out = "".join(instruction[1:])
+    out = " ".join(instruction[1:])
     if out.startswith('"'):
         out = out.strip('"')
     elif out in variables:
         out = variables[out]
     print(out)
 
+def evalCondition(instruction:list[str])->bool:
+    arg1 = getValue(instruction[1])
+    op = instruction[2]
+    arg2 = getValue(instruction[3])
+    flag = False
+    match op:
+        case "EQ":
+            flag = arg1 == arg2
+        case "NE":
+            flag = arg1 != arg2
+        case "LT":
+            flag = arg1 < arg2  # type: ignore
+        case "GT":
+            flag = arg1 > arg2  # type: ignore
+        case "LE":
+            flag = arg1 <= arg2 # type: ignore
+        case "GE":
+            flag = arg1 >= arg2 # type: ignore
+    return flag
+
 def main(st:str):
-    instructions =  st.split("\n")  
-    for instruction in instructions:
-        instructStr = instruction.split()
+    instructions =  st.split("\n")
+    n = len(instructions)
+    instPtr = 1  
+    while(instPtr < n):
+        instructStr = instructions[instPtr].split()
+        if len(instructStr) == 0:
+            continue
         match(instructStr[0]):
             case "LET":
                 createVariable(instructStr)
@@ -101,13 +132,30 @@ def main(st:str):
                 subInstruct(instructStr)
             case "MUL":
                 mulInstruct(instructStr)
+            case "REM":
+                remInstruct(instructStr)
             case "DIV":
                 divInstruct(instructStr)
             case "EXP":
                 expInstruct(instructStr)
             case "INPUT":
                 inputInstruct(instructStr)
-            case "OUTPUT":
+            case "OUTPUT" | "PRINT":
                 outputInstruct(instructStr)
-st = "INPUT x as STR\nOUTPUT x"
+            case "IF":
+                flag = evalCondition(instructStr)
+                if not flag:
+                    ifCounter = 1
+                    while (ifCounter > 0):
+                        instPtr += 1
+                        instructStr = instructions[instPtr].split()
+                        if(instructStr[0]) == "IF":
+                            ifCounter += 1
+                        elif(instructStr[0] == "ENDIF"):
+                            ifCounter -=1
+        instPtr += 1
+
+st = """
+PRINT "HELLO WORLD"
+"""
 main(st)
