@@ -34,20 +34,20 @@ python main.py
 
 # 🗺️ Roadmap
 
-[x] Basic Variable Assignment
+* [x] Basic Variable Assignment
 
-[x] Basic Arithmetic Operations
+* [x] Basic Arithmetic Operations
 
-[x] Standard I/O (INPUT / OUTPUT)
+* [x] Standard I/O (INPUT / OUTPUT)
 
-[x] Control Flow (IF / ELSE)
+* [x] Control Flow (IF / ELSE)
 
-[x] Loops (WHILE)
+* [x] Loops (WHILE)
 
-[x] Regex Tokenizer
+* [x] Regex Tokenizer
 
-[ ] Complex Math Expressions (Shunting Yard Integration)
+* [ ] Complex Math Expressions (Shunting Yard Integration)
 
-[ ] Relational/Logical Operators (AND, OR)
+* [ ] Relational/Logical Operators (AND, OR)
 
-[ ] Local Scope & Functions
+* [ ] Local Scope & Functions
