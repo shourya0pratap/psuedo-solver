@@ -30,3 +30,24 @@ The interpreter operates in a multi-stage pipeline:
 4. Run the script:
 ```bash
 python main.py
+```
+
+# 🗺️ Roadmap
+
+[x] Basic Variable Assignment
+
+[x] Basic Arithmetic Operations
+
+[x] Standard I/O (INPUT / OUTPUT)
+
+[x] Control Flow (IF / ELSE)
+
+[x] Loops (WHILE)
+
+[x] Regex Tokenizer
+
+[ ] Complex Math Expressions (Shunting Yard Integration)
+
+[ ] Relational/Logical Operators (AND, OR)
+
+[ ] Local Scope & Functions
